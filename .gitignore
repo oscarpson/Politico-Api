@@ -1,0 +1,4 @@
+##exclude virtual environment 
+.env
+.idea/
+.vscode/
