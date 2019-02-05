@@ -19,4 +19,21 @@ class parties():
         #return data in json form
         return jsonify(partyData)
 
+    def post(self):
+       # id=request.args['id']
+        partyjson=request.get_json()
+        id=partyjson["id"]
+        name=partyjson['name']    
+        hqAddress=partyjson['hqAddress']
+        logoUrl=partyjson['logoUrl']
+
+        #create new party object
+        new_party=party(id,name,hqAddress,logoUrl)
+        #add to data dictionary
+        parties_list.append(new_party)
+        
+        return jsonify({'status':'201','data':{'id':id,'name':name,'hqAddress':hqAddress,'logoUrl':logoUrl}})
+
+
+
     
