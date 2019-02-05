@@ -14,6 +14,11 @@ def create_party():
     ptyResponse=prtInstance.post() #Post paty json data   
     return ptyResponse
 
+@party.route('/parties',methods=['PUT'])
+def update_party():
+    ptyResponse=prtInstance.put() # Update party deatils using specified id
+    return ptyResponse   
+
   
 
 
