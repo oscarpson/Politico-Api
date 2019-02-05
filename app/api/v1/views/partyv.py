@@ -31,9 +31,9 @@ class parties():
         parties_list.append(new_party)        
         return jsonify({'status':'201','data':{'id':id,'name':name,'hqAddress':hqAddress,'logoUrl':logoUrl}})
 
-    def put(self):        
+    def put(self,id):        
         if not request.json or 'id' not in request.json:
-            return jsonify({'status':400,'data':'party details cannot be null'} )
+            return jsonify({'status':400,'error':'party details cannot be null'} )
         partyjson=request.get_json()        
         id=partyjson["id"]
         name=partyjson['name']    
@@ -46,6 +46,37 @@ class parties():
         parties_list.remove(party_to_edit[0]) #remove party and append new party with specified details
         parties_list.append(edited_party)        
         return jsonify({'status':'200','data':{'id':party_to_edit[0].id,'name':party_to_edit[0].name,'hqAddress':party_to_edit[0].hqAddress,'logoUrl':party_to_edit[0].logoUrl}}),200
+
+    def delete(self,id):
+
+        if not 'id' :
+            return jsonify({'status':400,'error':'party id cannot be null'} )        
+        #partyjson=request.get_json()
+        #self.id=id 
+        party_to_delete=[party for party in parties_list if party.id == int(id)] 
+        if len(party_to_delete) < 1 :
+            return jsonify({'status':400,'error':'party does not exist'})  
+        parties_list.remove(party_to_delete[0])
+        return jsonify({'status':200,'data':'deleted successfuly'}) 
+
+    def patch(self,id,name):
+        if not request.json or 'id' not in request.json:
+            return jsonify({'status':400,'error':'party id cannot be null'} )        
+        partyjson=request.get_json()
+        id=partyjson["id"] 
+        name=partyjson['name']
+        party_to_patch=[party for party in parties_list if party.id == id]
+        
+        if len(party_to_patch) < 1 :
+            return jsonify({'status':404,'error':'party does not exist'}) 
+        party_to_patch[0].name=name
+        parties_list.append(party_to_patch) 
+        return request.method 
+        
+        #return jsonify({'status':200,'data':'deleted successfuly'}) 
+
+
+
         
 
 
