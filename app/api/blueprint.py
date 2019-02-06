@@ -4,12 +4,17 @@ from app.api.v1.views.OfficeView import Offices
 prtInstance=parties()  #create party object and will initialize all blueprint 
 officeInstance= Offices()
 #prty blueprint
-party= Blueprint("parties",__name__) 
+party= Blueprint("parties",__name__,url_prefix="/api/v1/") 
 office=Blueprint("offices",__name__,url_prefix="/api/v1/")
 
 @party.route('/parties',methods=['GET'])
 def all_parties():
     all_parties=prtInstance.get() #get all parties using GET http verb
+    return all_parties
+
+@party.route('/parties/<id>',methods=['GET'])
+def all_specific_party(id):
+    all_parties=prtInstance.get(id) #get all parties using GET http verb
     return all_parties
 
 @party.route('/parties',methods=['POST'])
@@ -30,11 +35,11 @@ def delete_party(id):
     return ptyResponse 
 
 
-@party.route('/part/<id>/<name>',methods=['PATCH'])  
+@party.route('/parties/<id>/<name>',methods=['PATCH'])  
 def update_viapatch(id,name):
-    #ptyResponse=prtInstance.patch(int(id), name)
+    ptyResponse=prtInstance.patch(int(id), name)
 
-    return jsonify({'name':name}) 
+    return ptyResponse 
 
 #office blueprints start here
 @office.route('/offices',methods=['GET'])
