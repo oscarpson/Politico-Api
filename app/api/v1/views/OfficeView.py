@@ -9,6 +9,12 @@ office_list.append(office2)
 
 class Offices():
     def get(self,id=None):
+        if id != None:
+            specific_office=[office for office in office_list if office.id ==int(id)]
+            if len(specific_office) < 1 :
+                return jsonify({'status':401,'error':'office not found'})
+            return jsonify({'status':200,'data':{'id':specific_office[0].id,'type':specific_office[0].type,'name':specific_office[0].name}})
+
         officeData=[]
         for office in office_list:
             officeData.append({'data':{'id':office.id,'type':office.type,'name':office.name}})

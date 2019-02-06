@@ -39,7 +39,12 @@ def update_viapatch(id,name):
 #office blueprints start here
 @office.route('/offices',methods=['GET'])
 def get_office():
-    officeResponse=officeInstance.get();
+    officeResponse=officeInstance.get()
+    return officeResponse  
+
+@office.route('/offices/<id>',methods=['GET'])
+def get_specific_office(id):
+    officeResponse=officeInstance.get(id);
     return officeResponse
 
 @office.route('offices',methods=['POST']) 
