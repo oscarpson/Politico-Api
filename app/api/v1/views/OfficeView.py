@@ -15,3 +15,14 @@ class Offices():
 
         officeData.append({'status':200})
         return jsonify(officeData),200    
+
+    def post(self):
+        if not request.json or 'id' not in request.json:
+            return jsonify({'status':400,'error':'office id cannot be null'})
+        officejson=request.get_json()
+        id=officejson['id']
+        type=officejson['type']
+        name=officejson['name']
+        new_office=office(id,type,name)
+        office_list.append(new_office)
+        return jsonify({'status':'201','data':{'id':id,'type':type,'name':name}})    
