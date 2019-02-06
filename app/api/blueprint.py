@@ -42,5 +42,10 @@ def get_office():
     officeResponse=officeInstance.get();
     return officeResponse
 
+@office.route('offices',methods=['POST']) 
+def post_office():
+    officeResponse=officeInstance.post()
+    return officeResponse     
+
 
 
