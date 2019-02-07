@@ -1,15 +1,14 @@
 import unittest
 import pytest
 import json
-from run import app
-
+from app.api.app import create_app 
 
 
 class OfficeTest(unittest.TestCase):   
 
     def setUp(self):
         
-        self.app = app
+        self.app =create_app()
         
         self.app = self.app.test_client()
         self.BASE_URL = 'http://127.0.0.1:5000/api/v1/offices'        
