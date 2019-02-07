@@ -21,9 +21,13 @@ class OfficeTest(unittest.TestCase):
         self.app.testing = False
         self.app = None
         self.BASE_URL = None
-    def test_get_offices(self):
+
+    def test_get_an_offices(self):
         resp=self.app.get('/api/v1/offices', content_type='application/json')  
         self.assertEqual(resp.status_code, 200)
+    def test_post_an_office(self):
+        resp=self.app.post('/api/v1/offices',data=self.add_office,content_type='aplication/json')
+        self.assertEqual(resp.status_code,200) 
 
     def test_get_parties(self):
         resp=self.app.get('/api/v1/parties',content_type='applicaion/json')  
