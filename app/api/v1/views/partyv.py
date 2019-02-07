@@ -17,13 +17,13 @@ class parties():
 
     def post(self):       
         partyjson=request.get_json(force= True)        
-        name=partyjson['name']   
+        name=partyjson['name']    ## ERROR!
         hqAddress=partyjson['hqAddress']
         logoUrl=partyjson['logoUrl']        
         id=len(parties_list)+1
         myparty={"id":id,"name":name,"hqAddress":hqAddress,"logoUrl":logoUrl}#create new party object       
         parties_list.append(myparty)                
-        return make_response(jsonify({'status':'201'},{'data':[myparty]}),200)
+        return jsonify({'status':'201'},{'data':[myparty]})
 
 
     
@@ -47,7 +47,7 @@ class parties():
         
         if len(party_to_patch) < 1 :
             return jsonify({'status':404,'error':'party does not exist'}) 
-        party_to_patch[0].name=name
+        party_to_patch[0]["name"]=name
         parties_list.append(party_to_patch) 
         return jsonify({'status':200,'data':{'id':party_to_patch[0]["id"],'name':party_to_patch[0]["name"]}}) 
         
