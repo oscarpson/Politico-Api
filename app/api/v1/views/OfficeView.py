@@ -16,7 +16,7 @@ class Offices():
     def post(self):
         if not request.json:
             return jsonify({'status':400,'error':'office id cannot be null'})
-        officejson=request.get_json()        
+        officejson=request.get_json(force= True)        
         type=officejson["type"]
         name=officejson["name"]
         id=len(office_list)+1

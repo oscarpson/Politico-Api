@@ -29,10 +29,16 @@ class OfficeTest(unittest.TestCase):
         resp=self.app.get('/api/v1/parties',content_type='applicaion/json')  
         self.assertEqual(resp.status_code,200) 
 
-    def test_get_specific_office(self):        
+    def test_get_specific_party(self):        
         self.app.post('/api/v1/parties',data=self.add_party,content_type='applicaion/json')
         resp=self.app.get('/api/v1/parties/1',content_type='applicaion/json')  
-        self.assertEqual(resp.status_code,200)  
+        self.assertEqual(resp.json["status"],200)  
+
+    def test_delete_specific_party(self):
+        self.app.post('/api/v1/parties',data=self.add_party,content_type='applicaion/json')
+        resp=self.app.delete('/api/v1/parties/1',content_type='applicaion/json')  
+        self.assertEqual(resp.json["status"],200)  
+
 
 if __name__ == '__main__':
     unittest.main()        
