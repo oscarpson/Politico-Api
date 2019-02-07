@@ -11,7 +11,7 @@ class Offices():
                 return jsonify({'status':401,'error':'office not found'})
             return jsonify({'status':200,'data':{'id':specific_office[0]["id"],'type':specific_office[0]["type"],'name':specific_office[0]["name"]}})
 
-        return make_response(jsonify({"status":210},{"data":office_list}),200)
+        return make_response(jsonify({"status":200},{"data":office_list}),200)
 
     def post(self):
         if not request.json:

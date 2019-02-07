@@ -15,18 +15,16 @@ class parties():
         return make_response(jsonify({"status":200},{"data":parties_list}),200)
         
 
-    def post(self):
-       # id=request.args['id']
-        partyjson=request.get_json()
-        #d=len(parties_list)+1
-        name=partyjson["name"]    
+    def post(self):       
+        partyjson=request.get_json(force= True)        
+        name=partyjson['name']    ## ERROR!
         hqAddress=partyjson['hqAddress']
         logoUrl=partyjson['logoUrl']        
         id=len(parties_list)+1
-        myparty={"id":id,"name":name,"hqAddress":hqAddress,"logoUrl":logoUrl}#create new party object
-        #add to data dictionary
-        parties_list.append(myparty)        
-        return jsonify({'status':'201','data':{'name':name,'hqAddress':hqAddress,'logoUrl':logoUrl}})
+        myparty={"id":id,"name":name,"hqAddress":hqAddress,"logoUrl":logoUrl}#create new party object       
+        parties_list.append(myparty)                
+        return jsonify({'status':'201'},{'data':[myparty]})
+
 
     
     def delete(self,id):
