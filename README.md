@@ -34,4 +34,4 @@ Politico application  is a forum for politicians and citizens where citizens can
 # Acknowledgment
  © 2019, Politico-forum, Released under [MIT 
 License](http://www.opensource.org/licenses/mit-license.php).
- Politico forum is authored and  maintained by #### Oscar Muigai
+ Politico forum is authored and  maintained by  [Oscar Muigai](https://github.com/oscarpson/Politico-Api)

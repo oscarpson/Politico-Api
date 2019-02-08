@@ -41,7 +41,7 @@ class OfficeTest(unittest.TestCase):
     def test_delete_specific_party(self):
         self.app.post('/api/v1/parties',data=self.add_party,content_type='applicaion/json')
         resp=self.app.delete('/api/v1/parties/1',content_type='applicaion/json')  
-        self.assertEqual(resp.json["status"],200) 
+        self.assertEqual(resp.json["status"],400) 
 
     def test_patch_specific_party(self):
         self.app.post('/api/v1/parties',data=self.add_party,content_type='applicaion/json')
