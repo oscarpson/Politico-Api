@@ -10,8 +10,9 @@ class parties():
             return jsonify({'status':200,'data':{'id':partydata[0]["id"],'name':partydata[0]["name"],'logoUrl':partydata[0]["logoUrl"]}})            
         return make_response(jsonify({"status":200},{"data":parties_list}),200)     
 
-    def post(self): 
-        
+    def post(self):
+        #if not request.get_json or 'name' not in request.get_json or 'hqAddress' not in request.get_json:
+            #return make_response(jsonify({"status":400},{"error":"party details missing"}),400)
         partyjson=request.get_json(force= True)        
         name=partyjson['name']    
         hqAddress=partyjson['hqAddress']
@@ -21,7 +22,7 @@ class parties():
         parties_list.append(myparty)                
         return jsonify({'status':'201'},{'data':[myparty]})    
     def delete(self,id):
-        if not 'id' :
+        if id == None or id != isinstance(id,int) :
             return jsonify({'status':400,'error':'party id cannot be null'} )        
     
         party_to_delete=[party for party in parties_list if party["id"] == int(id)] 
@@ -32,7 +33,7 @@ class parties():
 
     def patch(self,id,name):
         if id == None or name == None:
-            return jsonify({'status':400,'error':'party id cannot be null'} )     
+            return jsonify({'status':400,'error':'party id cannot be null'} ),400     
                 
         party_to_patch=[party for party in parties_list if party["id"] == int(id)]
         
@@ -42,7 +43,6 @@ class parties():
         parties_list.append(party_to_patch) 
         return jsonify({'status':200,'data':{'id':party_to_patch[0]["id"],'name':party_to_patch[0]["name"]}}) 
         
-        #return jsonify({'status':200,'data':'deleted successfuly'}) 
 
 
 
