@@ -1,5 +1,6 @@
 # Politico-Api      [![Build Status](https://travis-ci.org/oscarpson/Politico-Api.svg?branch=develop)](https://travis-ci.org/oscarpson/Politico-Api)        [![Coverage Status](https://coveralls.io/repos/github/oscarpson/Politico-Api/badge.svg?branch=develop)](https://coveralls.io/github/oscarpson/Politico-Api?branch=develop)        [![Maintainability](https://api.codeclimate.com/v1/badges/05a8750d2198c3bb504e/maintainability)](https://codeclimate.com/github/oscarpson/Politico-Api/maintainability)
 Politico application  is a forum for politicians and citizens where citizens can express their voting rights  and politicians showing interest by running for pollical offices 
+
 # Usage
 
 ## Installation
