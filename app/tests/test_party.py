@@ -17,11 +17,11 @@ class PoliticalParty(BaseTest):
     def test_delete_specific_party(self): 
         self.client().post('/api/v1/parties',data=self.add_party,content_type='application/json')        
         resp=self.client().delete('/api/v1/parties/1',data=self.add_party,content_type='application/json')  
+        print(resp.json)
         self.assertEqual(resp.json["status"],200)  
     def test_update_specific_party(self):        
-        rlp = self.client().post('/api/v1/parties',data=self.add_party,content_type='application/json')  
-        resp=self.client().patch('/api/v1/parties/2/Chama Cha Wanaume Pekee',content_type='application/json')  
-        
+        self.client().post('/api/v1/parties',data=self.add_party,content_type='application/json')  
+        resp=self.client().patch('/api/v1/parties/2/Chama Cha Wanaume Pekee',content_type='application/json')        
         self.assertEqual(resp.json["status"],200)
 
         

@@ -21,7 +21,7 @@ class parties():
         parties_list.append(myparty)                
         return make_response(jsonify({"status":201},{"data":myparty}),201) 
     def delete(self,id):
-        if id == None or id != isinstance(id,int) :
+        if id == None :
             return jsonify({'status':400,'error':'party id cannot be null'} )        
     
         party_to_delete=[party for party in parties_list if party["id"] == int(id)] 
