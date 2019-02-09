@@ -11,16 +11,15 @@ class parties():
         return make_response(jsonify({"status":200},{"data":parties_list}),200)     
 
     def post(self):
-        #if not request.get_json or 'name' not in request.get_json or 'hqAddress' not in request.get_json:
-            #return make_response(jsonify({"status":400},{"error":"party details missing"}),400)
+        
         partyjson=request.get_json(force= True)        
-        name=partyjson['name']    
-        hqAddress=partyjson['hqAddress']
-        logoUrl=partyjson['logoUrl']        
-        id=len(parties_list)+1
-        myparty={"id":id,"name":name,"hqAddress":hqAddress,"logoUrl":logoUrl}#create new party object       
+        name=partyjson["name"] 
+        hqAddress=partyjson["hqAddress"]
+        logoUrl=partyjson["logoUrl"]        
+        _id=len(parties_list)+1
+        myparty={"id":_id,"name":name,"hqAddress":hqAddress,"logoUrl":logoUrl}       
         parties_list.append(myparty)                
-        return jsonify({'status':'201'},{'data':[myparty]})    
+        return make_response(jsonify({"status":201},{"data":myparty}),201) 
     def delete(self,id):
         if id == None or id != isinstance(id,int) :
             return jsonify({'status':400,'error':'party id cannot be null'} )        
