@@ -5,11 +5,12 @@ from app.api.v1 import views
 from app.api.app import create_app 
 
 
+
 class BaseTest(unittest.TestCase):   
 
     def setUp(self):
         
-        self.app =create_app()
+        self.app =create_app(config_name="testing")
         self.client=self.app.test_client
         self.client1=self.app.test_client()
         
