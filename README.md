@@ -3,6 +3,9 @@ Politico application  is a forum for politicians and citizens where citizens can
 
 # Usage
 
+## Heroku service
+Heroku url - `https://thawing-atoll-30148.herokuapp.com/api/v1/`
+
 ## Installation
 *	Clone politico-api from `https://github.com/oscarpson/Politico-Api.git`
 *	Install api requirements from requirements file in root directory by running `pip install -r requirements.txt`

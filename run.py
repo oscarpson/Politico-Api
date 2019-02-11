@@ -1,9 +1,6 @@
-from flask import Flask
-from app.api.blueprint import party
-from app.api.blueprint import office
-app=Flask(__name__)
-app.register_blueprint(party)  #register party blueprint
-app.register_blueprint(office)
+from app.api.app import create_app
+
+app=create_app("development")
 
 if __name__ == '__main__':
     app.run(debug =True)
