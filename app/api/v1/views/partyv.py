@@ -1,9 +1,12 @@
 from flask import Flask,request, jsonify, make_response,json
 from app.api.v1.models.Party import PartyClass as party
+from app.api.validation import ValidateData as validate
 parties_list=[]
 class parties():
     def get(self,id=None):
         if id !=None:
+            if validate().validate_politicoid(id,"Party id must be a number"):
+                return validate().validate_politicoid(id,"Party id must be a number")
             partydata=[party for party in parties_list if party["id"] == int(id)]
             if len(partydata) < 1:
                 return make_response(jsonify({'status':404,'error':'party does not exist'}),404)
@@ -11,18 +14,22 @@ class parties():
         return make_response(jsonify({"status":200},{"data":parties_list}),200)     
 
     def post(self):
-        
+        if not request.json:
+            return validate().validate_json_format("Party")
         partyjson=request.get_json(force= True)        
         name=partyjson["name"] 
         hqAddress=partyjson["hqAddress"]
-        logoUrl=partyjson["logoUrl"]        
+        logoUrl=partyjson["logoUrl"] 
+        if validate().validate_party_data(name,hqAddress,logoUrl):
+            return validate().validate_party_data(name,hqAddress,logoUrl)    
         _id=len(parties_list)+1
         myparty={"id":_id,"name":name,"hqAddress":hqAddress,"logoUrl":logoUrl}       
         parties_list.append(myparty)                
         return make_response(jsonify({"status":201},{"data":myparty}),201) 
     def delete(self,id):
-        if id == None :
-            return jsonify({'status':400,'error':'party id cannot be null'} )        
+        
+        if validate().validate_politicoid(id,"Party id must be a number"):
+                return validate().validate_politicoid(id,"Party id must be a number")       
     
         party_to_delete=[party for party in parties_list if party["id"] == int(id)] 
         if len(party_to_delete) < 1 :
@@ -30,11 +37,11 @@ class parties():
         parties_list.remove(party_to_delete[0])
         return jsonify({'status':200,'data':'deleted successfuly'}) 
 
-    def patch(self,id,name):
-        if id == None or name == None:
-            return jsonify({'status':400,'error':'party id cannot be null'} ),400     
-                
-        party_to_patch=[party for party in parties_list if party["id"] == int(id)]
+    def patch(self,_id,name):
+        if _id == None or name == None:
+            return jsonify({'status':400,'error':'party id cannot be null'} ),400  
+               
+        party_to_patch=[party for party in parties_list if party["id"] == int(_id)]
         
         if len(party_to_patch) < 1 :
             return jsonify({'status':404,'error':'party does not exist'}) 

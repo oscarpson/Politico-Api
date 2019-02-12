@@ -16,8 +16,7 @@ class PoliticalParty(BaseTest):
         self.assertEqual(resp.json["status"],200)
     def test_delete_specific_party(self): 
         self.client().post('/api/v1/parties',data=self.add_party,content_type='application/json')        
-        resp=self.client().delete('/api/v1/parties/1',data=self.add_party,content_type='application/json')  
-        print(resp.json)
+        resp=self.client().delete('/api/v1/parties/1',data=self.add_party,content_type='application/json')
         self.assertEqual(resp.json["status"],200)  
     def test_update_specific_party(self):        
         self.client().post('/api/v1/parties',data=self.add_party,content_type='application/json')  
