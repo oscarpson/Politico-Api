@@ -39,6 +39,7 @@ class Offices():
         id = len(office_list) + 1
         new_office = {"id": id, "type": type, "name": name}
         office_list.append(new_office)
+
         return make_response(
             jsonify({"status": "201"}, {"data": new_office},
                     {"msg": "office added"}), 201)
