@@ -1,11 +1,14 @@
 from flask import Flask,request, jsonify, make_response
 from app.api.v1.models.Office import OfficeClass as office
+from app.api.validation import ValidateData as validate
 
 office_list=[]  #list of offices
 #office1=office(1,'govt','Senate')
 class Offices():
     def get(self,id=None):
         if id != None:
+            if validate().validate_politicoid(id,"Office id must be a number"):
+                return validate().validate_politicoid(id,"Office id must be a number")
             specific_office=[office for office in office_list if office.id ==int(id)]
             if len(specific_office) < 1 :
                 return jsonify({'status':401,'error':'office not found'})
@@ -15,10 +18,12 @@ class Offices():
 
     def post(self):
         if not request.json:
-            return jsonify({'status':400,'error':'office id cannot be null'})
+            return validate().validate_json_format("office")
         officejson=request.get_json(force= True)        
         type=officejson["type"]
         name=officejson["name"]
+        if validate().validate_office_data(type,name):            
+            return validate().validate_office_data(type,name)
         id=len(office_list)+1
         new_office={"id":id,"type":type,"name":name}
         office_list.append(new_office)
