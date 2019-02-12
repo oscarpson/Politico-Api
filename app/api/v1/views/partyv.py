@@ -1,12 +1,12 @@
 from flask import Flask,request, jsonify, make_response,json
 from app.api.v1.models.Party import PartyClass as party
-from app.api.validation import ValidateData as validate
+from app.api.errorHandler.party_validation import ValidateParty as validate
 parties_list=[]
 class parties():
     def get(self,id=None):
         if id !=None:
-            if validate().validate_politicoid(id,"Party id must be a number"):
-                return validate().validate_politicoid(id,"Party id must be a number")
+            if validate().validate_politico_partyid(id):
+                return validate().validate_politico_partyid(id)
             partydata=[party for party in parties_list if party["id"] == int(id)]
             if len(partydata) < 1:
                 return make_response(jsonify({'status':404,'error':'party does not exist'}),404)
@@ -15,7 +15,7 @@ class parties():
 
     def post(self):
         if not request.json:
-            return validate().validate_json_format("Party")
+            return validate().validate_party_json_format()
         partyjson=request.get_json(force= True)        
         name=partyjson["name"] 
         hqAddress=partyjson["hqAddress"]
@@ -28,8 +28,8 @@ class parties():
         return make_response(jsonify({"status":201},{"data":myparty}),201) 
     def delete(self,id):
         
-        if validate().validate_politicoid(id,"Party id must be a number"):
-                return validate().validate_politicoid(id,"Party id must be a number")       
+        if validate().validate_politico_partyid(id):
+                return validate().validate_politico_partyid(id)    
     
         party_to_delete=[party for party in parties_list if party["id"] == int(id)] 
         if len(party_to_delete) < 1 :
