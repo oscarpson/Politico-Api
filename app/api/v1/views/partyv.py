@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, make_response, json
 from app.api.v1.models.Party import PartyClass as party
 from app.api.errorHandler.party_validation import ValidateParty as validate
+from app.database.userModel import UserModelClass as usertb
 parties_list = []
 
 
@@ -51,8 +52,10 @@ class parties():
             "logoUrl": logoUrl
         }
 
-        parties_list.append(myparty)
-        return make_response(jsonify({"status": 201}, {"data": myparty}), 201)
+        # parties_list.append(myparty)
+
+        restp = usertb().create_user(name, hqAddress)
+        return make_response(jsonify({"status": 201}, {"data": restp}), 201)
 
     def delete(self, id):
 
