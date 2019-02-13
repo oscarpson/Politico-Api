@@ -28,6 +28,7 @@ class Offices():
         return make_response(
             jsonify({"status": 200}, {"data": office_list}), 200)
 
+
     def post(self):
         if not request.json:
             return validate().validate_office_json_format()
