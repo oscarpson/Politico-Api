@@ -28,5 +28,8 @@ class CreateTables():
                 name Varchar(50) NOT NULL,hqAddress Varchar(50) NOT NULL,
                 logoUrl Varchar(50) NOT NULL,createdBy Varchar(50) NOT NULL)"""
 
+       
+            
+
         table_list = [create_user_query, create_user_query, create_party_query]
         return table_list
