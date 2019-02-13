@@ -1,11 +1,12 @@
 from flask import Blueprint, jsonify, request
-from app.api.v1.views.partyv import parties
-from app.api.v1.views.OfficeView import Offices
+from app.api.v2.views.partyv import parties
+from app.api.v2.views.OfficeView import Offices
+
 prtInstance = parties()  #create party object and will initialize all blueprint
-officeInstance = Offices()
+
 #prty blueprint
-party = Blueprint("parties", __name__, url_prefix="/api/v1/")
-office = Blueprint("offices", __name__, url_prefix="/api/v1/")
+party = Blueprint("parties", __name__, url_prefix="/api/v2/")
+office = Blueprint("offices", __name__, url_prefix="/api/v2/")
 
 
 @party.route('/parties', methods=['GET'])

@@ -9,6 +9,6 @@ class databasem():
             password="oscarcom5",
             host="localhost",
             port="5432",
-            database="testdb")
+            database="politico")
         #cursor = conn.Cursor()
         return conn

@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, make_response, json
 from app.api.v1.models.Party import PartyClass as party
 from app.api.errorHandler.party_validation import ValidateParty as validate
-
+from app.database.partyQuery import PartyQueries as partytb
 parties_list = []
 
 
@@ -43,19 +43,8 @@ class parties():
         if validate().validate_party_data(name, hqAddress, logoUrl):
             return validate().validate_party_data(name, hqAddress, logoUrl)
 
-        _id = len(parties_list) + 1
-
-        myparty = {
-            "id": _id,
-            "name": name,
-            "hqAddress": hqAddress,
-            "logoUrl": logoUrl
-        }
-
-        parties_list.append(myparty)
-
-        
-        return make_response(jsonify({"status": 201}, {"data": parties_list}), 201)
+        restp = partytb().create_party(name, hqAddress, logoUrl,"Admin")
+        return make_response(jsonify({"status": 201}, {"data": restp}), 201)
 
     def delete(self, id):
 
