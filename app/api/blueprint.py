@@ -1,12 +1,21 @@
 from flask import Blueprint, jsonify, request
 from app.api.v2.views.partyv import parties
 from app.api.v2.views.OfficeView import Offices
+from app.api.v2.views.userView import Users
 
 prtInstance = parties()  #create party object and will initialize all blueprint
-
+officeInstance = Offices()
+userInstance = Users()
 #prty blueprint
 party = Blueprint("parties", __name__, url_prefix="/api/v2/")
 office = Blueprint("offices", __name__, url_prefix="/api/v2/")
+user = Blueprint("auth/signup", __name__, url_prefix="/api/v2/")
+
+
+@user.route('/auth/signup', methods=['POST'])
+def add_user():
+    userResponse = userInstance.post()
+    return userResponse
 
 
 @party.route('/parties', methods=['GET'])
