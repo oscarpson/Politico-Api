@@ -1,8 +1,0 @@
-{
-    "python.pythonPath": "venv\\Scripts\\python.exe",
-    "python.linting.flake8Enabled": true,
-    "pythonTestExplorer.testFramework": "pytest",
-    "python.linting.enabled": false,
-    "python.linting.pep8Enabled": true,
-    "python.formatting.provider": "yapf"
-}
