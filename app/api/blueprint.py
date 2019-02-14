@@ -61,6 +61,11 @@ def get_office():
     officeResponse = officeInstance.get()
     return officeResponse
 
+@office.route('/offices/<id>/register', methods=['POST'])
+def add_candidate(id):
+    officeResponse = officeInstance.post_candidate(id)
+    return officeResponse
+
 
 @office.route('/offices/<id>', methods=['GET'])
 def get_specific_office(id):
