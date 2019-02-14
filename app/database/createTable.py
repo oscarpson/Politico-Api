@@ -28,8 +28,14 @@ class CreateTables():
                 name Varchar(50) NOT NULL,hqAddress Varchar(50) NOT NULL,
                 logoUrl Varchar(50) NOT NULL,createdBy Varchar(50) NOT NULL)"""
 
-       
-            
+        create_candidate_query = """CREATE TABLE IF NOT EXISTS candidate(id serial PRIMARY KEY,office int references Office(id),
+                party int REFERENCES Party(id),candidate int REFERENCES Puser(id))"""
 
-        table_list = [create_user_query, create_user_query, create_party_query]
+        create_vote_query = """CREATE TABLE IF NOT EXISTS vote(id serial ,createdOn Date NOT NULL,
+                createdBy int UNIQUE ,office int references Office(id),candidate int references Candidate(id),PRIMARY KEY(id,createdBy) )"""
+
+        table_list = [
+            create_user_query, create_user_query, create_party_query,
+            create_candidate_query, create_vote_query
+        ]
         return table_list
