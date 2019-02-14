@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, make_response
 from app.api.v1.models.Office import OfficeClass as office
 from app.api.errorHandler.office_validation import ValidateOffice as validate
+from app.database.officeQuery import OfficeQueries as officequery
 
 office_list = []  #list of offices
 
@@ -25,8 +26,25 @@ class Offices():
                 }
             })
 
+
         return make_response(
             jsonify({"status": 200}, {"data": office_list}), 200)
+
+
+    def post_candidate(self,id):
+
+        if not request.json:
+            return validate().validate_office_json_format()
+        officejson = request.get_json(force=True)
+        office = officejson["office"]
+        party = officejson["party"]
+        user=officejson["userId"]  
+
+        officeResponse=officequery().add_candidate(int(id),party,user)
+
+        return make_response(
+            jsonify({"status": "201"}, {"data": officeResponse},
+                    {"msg": "candidate added successfully"}), 201)    
 
     def post(self):
         if not request.json:
@@ -43,3 +61,5 @@ class Offices():
         return make_response(
             jsonify({"status": "201"}, {"data": new_office},
                     {"msg": "office added"}), 201)
+
+
