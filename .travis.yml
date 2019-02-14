@@ -9,6 +9,6 @@ services:
   - postgresql 
 before_script:
   - psql -c "CREATE DATABASE politico ;" -U postgres
-  
+
 after_success:
 - coveralls
