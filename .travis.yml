@@ -9,6 +9,6 @@ services:
   - postgresql 
 before_script:
   - psql -c "CREATE DATABASE politico ;" -U postgres
-  - psql -c "ALTER USER postgres PASSWORD 'oscarcom5';" -U postgres 
+  
 after_success:
 - coveralls
