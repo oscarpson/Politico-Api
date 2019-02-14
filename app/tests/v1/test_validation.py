@@ -1,5 +1,5 @@
 import unittest
-from app.tests.base_test import BaseTest
+from .base_test import BaseTest
 
 
 class PoliticalValidation(BaseTest):

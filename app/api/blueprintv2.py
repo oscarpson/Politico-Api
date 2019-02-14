@@ -1,16 +1,30 @@
 from flask import Blueprint, jsonify, request
-from app.api.v1.views.partyv import parties
-from app.api.v1.views.OfficeView import Offices
+from app.api.v2.views.partyv import parties
+from app.api.v2.views.OfficeView import Offices
 from app.api.v2.views.userView import Users
-#from app.api.v2.views.voteView import Votes
+from app.api.v2.views.voteView import Votes
 
 prtInstance = parties()  #create party object and will initialize all blueprint
 officeInstance = Offices()
 userInstance = Users()
-#voteInstance = Votes()
+voteInstance = Votes()
 #prty blueprint
 party = Blueprint("parties", __name__, url_prefix="/api/v1/")
 office = Blueprint("offices", __name__, url_prefix="/api/v1/")
+user = Blueprint("auth/signup", __name__, url_prefix="/api/v2/")
+vote = Blueprint("vote", __name__, url_prefix="/api/v2/")
+
+
+@user.route('/auth/signup', methods=['POST'])
+def add_user():
+    userResponse = userInstance.post()
+    return userResponse
+
+
+@vote.route('/vote', methods=['POST'])
+def add_vote():
+    voteResponse = voteInstance.post()
+    return voteResponse
 
 
 @party.route('/parties', methods=['GET'])
