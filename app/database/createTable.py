@@ -35,7 +35,7 @@ class CreateTables():
                 createdBy int UNIQUE ,office int references Office(id),candidate int references Candidate(id),PRIMARY KEY(id,createdBy) )"""
 
         table_list = [
-            create_user_query, create_user_query, create_party_query,
-            create_candidate_query, create_vote_query,create_office_query
+            create_user_query, create_office_query,create_party_query,
+            create_candidate_query, create_vote_query
         ]
         return table_list
