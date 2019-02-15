@@ -32,7 +32,7 @@ class BaseTest(unittest.TestCase):
             "userId": 2,
             "officeId": 5,
             "candidateId": 1
-        })
+        })        
 
         self.add_candidate = json.dumps({"office": 4, "party": 2, "userId": 2})
 
