@@ -6,7 +6,7 @@ class databasem():
     def connectdb(self):
         conn = psycopg2.connect(
             user="postgres",
-            password="",
+            password="oscarcom5",
             host="localhost",
             port="5432",
             database="politico")
