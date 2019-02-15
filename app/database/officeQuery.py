@@ -19,4 +19,7 @@ class OfficeQueries():
             "candidate": rows[1],
             
         }
-        return candidatelist    
+        return candidatelist  
+
+    def add_office(self,type,name):
+        insert_query="INSERT INTO Office(type,name) VALUES (%s,%s) RETURNING "

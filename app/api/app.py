@@ -17,5 +17,6 @@ def create_app(config_name):
     app.register_blueprint(usr)
     app.register_blueprint(voter)
 
-    createtb().tables()
+    xc = createtb()
+    xc.tables()
     return app

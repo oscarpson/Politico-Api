@@ -5,8 +5,10 @@ install:
   - "pip install -r requirements.txt"
 script:
  - pytest --cov=app
+services:
+  - postgresql 
 before_script:
-  - psql -c "CREATE DATABASE politico ;" -U postgres
-  - psql -c "ALTER USER postgres PASSWORD 'oscarcom5';" -U postgres 
+  - psql -c "CREATE DATABASE politico;" -U postgres
+
 after_success:
 - coveralls
