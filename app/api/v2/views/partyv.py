@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify, make_response, json
 from app.api.v2.models.Party import PartyClass as party
 from app.api.errorHandler.party_validation import ValidateParty as validate
 from app.database.partyQuery import PartyQueries as partytb
+from flask_jwt_extended import (jwt_required, get_jwt_identity)
+
 parties_list = []
 
 
