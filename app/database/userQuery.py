@@ -26,6 +26,7 @@ class UserQueries():
             "email": rows[3],
             "phoneNumber": rows[4],
             "passportUrl": rows[5],
-            "isAdmin": rows[6]
+            "isAdmin": rows[6],
+            "id": rows[7]
         }
         return userslist

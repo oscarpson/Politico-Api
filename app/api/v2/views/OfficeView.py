@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, make_response
+from flask_jwt_extended import (jwt_required, get_jwt_identity)
 from app.api.v1.models.Office import OfficeClass as office
 from app.api.errorHandler.office_validation import ValidateOffice as validate
 from app.database.officeQuery import OfficeQueries as officequery
@@ -30,7 +31,7 @@ class Offices():
         return make_response(
             jsonify({"status": 200}, {"data": office_list}), 200)
 
-
+    @jwt_required
     def post_candidate(self,id):
 
         if not request.json:
