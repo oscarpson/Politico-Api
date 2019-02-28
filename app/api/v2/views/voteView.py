@@ -16,9 +16,5 @@ class Votes():
         officeId = votejson["officeId"]
         candidateId = votejson["candidateId"]
         
-
-        #if validate().validate_vote(userId):
-        #    return validate().validate_vote(userId)
-
         restp = votequery().vote(createdOn, userId, officeId, candidateId)
         return make_response(jsonify({"status": 201}, {"data": restp}), 201)
