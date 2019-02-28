@@ -46,7 +46,7 @@ class Offices():
         return make_response(
             jsonify({"status": "201"}, {"data": officeResponse},
                     {"msg": "candidate added successfully"}), 201)    
-
+    @jwt_required
     def post(self):
         if not request.json:
             return validate().validate_office_json_format()
@@ -55,12 +55,23 @@ class Offices():
         name = officejson["name"]
         if validate().validate_office_data(type, name):
             return validate().validate_office_data(type, name)
-        id = len(office_list) + 1
-        new_office = {"id": id, "type": type, "name": name}
-        office_list.append(new_office)
+        # id = len(office_list) + 1
+        # new_office = {"id": id, "type": type, "name": name}
+        # office_list.append(new_office)
+        new_office=officequery().add_office(type,name)
 
         return make_response(
             jsonify({"status": "201"}, {"data": new_office},
                     {"msg": "office added"}), 201)
+
+    def vote_results(sewlf,officeId):
+        #TODO VALIDATE OFFICE ID
+        #offqry=officequery()
+        total_votes= officequery().voting_results(officeId)
+        return make_response(
+            jsonify({"status": "201"}, {"data": total_votes},
+                    {"msg": "Success"}), 201)
+
+
 
 
