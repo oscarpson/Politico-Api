@@ -30,3 +30,24 @@ class UserQueries():
             "id": rows[7]
         }
         return userslist
+
+    def user_login(self, username, phonenumber):
+        login_query = "SELECT * FROM Puser WHERE firstname=%s AND phonenumber=%s"
+        self.cursors.execute(login_query, (username, phonenumber))
+        self.connect.commit()
+        login_user_row = self.cursors.fetchone()
+        if login_user_row == None:
+            return {"msg": "Failed"}
+        else:
+            userlogin = {
+                "firstname": login_user_row[0],
+                "lastname": login_user_row[1],
+                "othername": login_user_row[2],
+                "email": login_user_row[3],
+                "phoneNumber": login_user_row[4],
+                "passportUrl": login_user_row[5],
+                "isAdmin": login_user_row[6],
+                "id": login_user_row[7],
+                "msg": "Success"
+            }
+            return userlogin

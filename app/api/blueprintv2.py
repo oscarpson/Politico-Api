@@ -9,8 +9,8 @@ officeInstance = Offices()
 userInstance = Users()
 voteInstance = Votes()
 #prty blueprint
-party = Blueprint("parties", __name__, url_prefix="/api/v1/")
-office = Blueprint("offices", __name__, url_prefix="/api/v1/")
+party = Blueprint("parties", __name__, url_prefix="/api/v2/")
+office = Blueprint("offices", __name__, url_prefix="/api/v2/")
 user = Blueprint("auth/signup", __name__, url_prefix="/api/v2/")
 vote = Blueprint("vote", __name__, url_prefix="/api/v2/")
 
@@ -19,6 +19,11 @@ vote = Blueprint("vote", __name__, url_prefix="/api/v2/")
 def add_user():
     userResponse = userInstance.post()
     return userResponse
+
+@user.route('/auth/signin',methods=['POST'])
+def sign_in_user():
+    signin_response=userInstance.signin()
+    return signin_response    
 
 
 @vote.route('/vote', methods=['POST'])
@@ -80,3 +85,8 @@ def get_specific_office(id):
 def post_office():
     officeResponse = officeInstance.post()
     return officeResponse
+
+@office.route('offices/<id>/results',methods=['GET'])  
+def votings_results(id):
+    voteresults=officeInstance.vote_results(id)
+    return voteresults

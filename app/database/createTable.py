@@ -19,7 +19,7 @@ class CreateTables():
         create_user_query = """CREATE TABLE IF NOT EXISTS Puser(id serial PRIMARY KEY,
                 firstname Varchar(50) NOT NULL,lastname Varchar(50) NOT NULL,
                 othername Varchar(50) NOT NULL,email Varchar(50) NOT NULL,
-                phoneNumber Varchar(20) NOT NULL,passportUrl Varchar(100) NOT NULL,
+                phoneNumber Varchar(20) UNIQUE NOT NULL,passportUrl Varchar(100) NOT NULL,
                 isAdmin BOOLEAN NOT NULL )"""
 
         create_office_query = """CREATE TABLE IF NOT EXISTS Office (id serial PRIMARY KEY,type Varchar(50) NOT NULL,name Varchar(50))"""

@@ -41,7 +41,7 @@ class Users():
             "passportUrl": restp["passportUrl"],
             "isAdmin": restp["isAdmin"],
             "access-token": access_token,
-            "refresh-token":refresh_token
+            "refresh-token": refresh_token
         }
 
         return make_response(
@@ -51,3 +51,31 @@ class Users():
         if not request.json:
             return validate().validate_user_json_format()
 
+        userjson = request.get_json(force=True)
+        firstname = userjson["firstname"]
+        phonenumber = userjson["phoneNumber"]
+        restp = userquery().user_login(firstname, phonenumber)
+        if restp['msg'] == "Failed":
+            return make_response(
+                jsonify({"status": 201}, {
+                    "error":
+                    "Login failed,Either firstname or phonenumber is wrong"
+                }), 401)
+        else:
+            access_token = create_access_token(
+                identity=restp['id'], fresh=True)
+            refresh_token = create_refresh_token(identity=restp['id'])
+            user_list = {
+                "firstname": restp['firstname'],
+                "lastname": restp["lastname"],
+                "othername": restp["othername"],
+                "email": restp["email"],
+                "phoneNumber": restp["phoneNumber"],
+                "passportUrl": restp["passportUrl"],
+                "isAdmin": restp["isAdmin"],
+                "access-token": access_token,
+                "refresh-token": refresh_token
+            }
+
+            return make_response(
+                jsonify({"status": 201}, {"data": user_list}), 201)

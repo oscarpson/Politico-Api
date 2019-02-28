@@ -16,10 +16,10 @@ def create_app(config_name):
     jwt = JWTManager(app)
     app.register_blueprint(party)  #register party blueprint
     app.register_blueprint(v2office)
-
+    #app.register_blueprint(v1office)
     app.register_blueprint(usr)
     app.register_blueprint(voter)
 
-    xc = createtb()
-    xc.tables()
+    createdbInstance = createtb()
+    createdbInstance.tables()
     return app

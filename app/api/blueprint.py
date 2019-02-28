@@ -1,16 +1,16 @@
 from flask import Blueprint, jsonify, request
 from app.api.v1.views.partyv import parties
-from app.api.v1.views.OfficeView import Offices
-from app.api.v2.views.userView import Users
+# from app.api.v1.views.OfficeView import Offices
+# from app.api.v2.views.userView import Users
 #from app.api.v2.views.voteView import Votes
 
 prtInstance = parties()  #create party object and will initialize all blueprint
-officeInstance = Offices()
-userInstance = Users()
+# officeInstance = Offices()
+# userInstance = Users()
 #voteInstance = Votes()
 #prty blueprint
 party = Blueprint("parties", __name__, url_prefix="/api/v1/")
-office = Blueprint("offices", __name__, url_prefix="/api/v1/")
+# office = Blueprint("offices", __name__, url_prefix="/api/v1/")
 
 
 @party.route('/parties', methods=['GET'])
@@ -44,25 +44,25 @@ def update_viapatch(id, name):
 
 
 #office blueprints start here
-@office.route('/offices', methods=['GET'])
-def get_office():
-    officeResponse = officeInstance.get()
-    return officeResponse
+# @office.route('/offices', methods=['GET'])
+# def get_office():
+#     officeResponse = officeInstance.get()
+#     return officeResponse
 
 
-@office.route('/offices/<id>/register', methods=['POST'])
-def add_candidate(id):
-    officeResponse = officeInstance.post_candidate(id)
-    return officeResponse
+# @office.route('/offices/<id>/register', methods=['POST'])
+# def add_candidate(id):
+#     officeResponse = officeInstance.post_candidate(id)
+#     return officeResponse
 
 
-@office.route('/offices/<id>', methods=['GET'])
-def get_specific_office(id):
-    officeResponse = officeInstance.get(id)
-    return officeResponse
+# @office.route('/offices/<id>', methods=['GET'])
+# def get_specific_office(id):
+#     officeResponse = officeInstance.get(id)
+#     return officeResponse
 
 
-@office.route('offices', methods=['POST'])
-def post_office():
-    officeResponse = officeInstance.post()
-    return officeResponse
+# @office.route('offices', methods=['POST'])
+# def post_office():
+#     officeResponse = officeInstance.post()
+#     return officeResponse
