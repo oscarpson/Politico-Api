@@ -5,7 +5,7 @@ from app.api.blueprintv2 import party
 from app.api.blueprintv2 import office as v2office
 from app.api.blueprintv2 import user as usr
 from app.api.blueprintv2 import vote as voter
-#from app.api.blueprint import office as v1office
+from app.api.blueprint import *
 from app.database.createTable import CreateTables as createtb
 
 
